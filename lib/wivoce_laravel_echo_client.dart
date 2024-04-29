@@ -9,9 +9,10 @@ import 'package:wivoce_laravel_echo_client/src/connector/socketio_connector.dart
 export 'package:wivoce_laravel_echo_client/src/channel/presence_channel.dart';
 export 'package:wivoce_laravel_echo_client/src/channel/private_channel.dart';
 
+// ignore_for_file: constant_identifier_names
 enum EchoBroadcasterType {
-  socketIO,
-  pusher,
+  SocketIO,
+  Pusher,
 }
 
 class Echo {
@@ -26,11 +27,11 @@ class Echo {
 
   /// Create a new class instance.
   Echo({
-    EchoBroadcasterType broadcaster = EchoBroadcasterType.pusher,
+    EchoBroadcasterType broadcaster = EchoBroadcasterType.Pusher,
     required dynamic client,
     Map<String, dynamic>? options,
   }) {
-    broadcaster = broadcaster;
+    this.broadcaster = broadcaster;
     this.options = options ?? {};
     this.options['client'] = client;
     connect();
@@ -43,9 +44,9 @@ class Echo {
 
   /// Create a new connection.
   void connect() {
-    if (broadcaster == EchoBroadcasterType.pusher) {
+    if (broadcaster == EchoBroadcasterType.Pusher) {
       connector = PusherConnector(options);
-    } else if (broadcaster == EchoBroadcasterType.socketIO) {
+    } else if (broadcaster == EchoBroadcasterType.SocketIO) {
       connector = SocketIoConnector(options);
     }
   }

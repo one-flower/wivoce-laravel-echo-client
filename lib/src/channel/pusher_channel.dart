@@ -24,9 +24,9 @@ class PusherChannel extends Channel {
 
   /// Create a new class instance.
   PusherChannel(dynamic pusher, String name, Map<String, dynamic> options) {
-    name = name;
-    pusher = pusher;
-    options = options;
+    this.name = name;
+    this.pusher = pusher;
+    this.options = options;
     // ignore: unnecessary_new
     eventFormatter = new EventFormatter(this.options['namespace']);
 

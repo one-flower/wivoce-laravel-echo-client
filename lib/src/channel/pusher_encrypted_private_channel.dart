@@ -12,7 +12,7 @@ class PusherEncryptedPrivateChannel extends PusherChannel {
 
   /// Trigger client event on the channel.
   PusherEncryptedPrivateChannel whisper(String eventName, dynamic data) {
-    pusher.channels.channels[name].trigger('client-$eventName', data);
+    this.pusher.channels.channels[this.name].trigger('client-$eventName', data);
 
     return this;
   }

@@ -25,9 +25,9 @@ class SocketIoChannel extends Channel {
 
   /// Create a new class instance.
   SocketIoChannel(dynamic socket, String name, Map<String, dynamic> options) {
-    name = name;
-    socket = socket;
-    options = options;
+    this.name = name;
+    this.socket = socket;
+    this.options = options;
     eventFormatter = EventFormatter(this.options['namespace']);
 
     subscribe();
