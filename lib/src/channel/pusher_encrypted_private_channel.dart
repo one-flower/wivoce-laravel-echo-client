@@ -1,0 +1,19 @@
+import 'package:wivoce_laravel_echo_client/src/channel/pusher_channel.dart';
+
+///
+/// This class represents a Pusher private channel.
+///
+class PusherEncryptedPrivateChannel extends PusherChannel {
+  PusherEncryptedPrivateChannel(
+    dynamic pusher,
+    String name,
+    dynamic options,
+  ) : super(pusher, name, options);
+
+  /// Trigger client event on the channel.
+  PusherEncryptedPrivateChannel whisper(String eventName, dynamic data) {
+    pusher.channels.channels[name].trigger('client-$eventName', data);
+
+    return this;
+  }
+}
