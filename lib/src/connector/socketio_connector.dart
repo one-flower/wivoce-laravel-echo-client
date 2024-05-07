@@ -10,6 +10,9 @@ class SocketIoConnector extends Connector {
   /// The Socket.io connection instance.
   dynamic socket;
 
+  /// token刷新
+  Function? refreshToken;
+
   /// All of the subscribed channel names.
   Map<String, SocketIoChannel> channels = {};
 
@@ -19,9 +22,23 @@ class SocketIoConnector extends Connector {
   @override
   void connect() {
     socket = options['client'];
+    refreshToken = options['refreshToken'];
     socket.connect();
 
-    socket.on('reconnect', (_) {
+    socket.on('reconnect', (_) async {
+      // token 刷新逻辑
+      if (refreshToken is Function) {
+        String token = await refreshToken!();
+        if (!options.containsKey('auth')) {
+          options['auth'] = {};
+          var auth = options['auth'];
+          if (!auth.containsKey('headers')) {
+            auth['headers'] = {};
+          }
+        }
+        options['auth']['headers']['Authorization'] = 'Bearer $token';
+      }
+
       channels.values.forEach((channel) => channel.subscribe());
     });
   }

@@ -1,6 +1,6 @@
 name: wivoce_laravel_echo_client
 description: 基于laravel-echo插件.
-version: 1.0.0
+version: 1.0.2
 homepage: https://github.com/one-flower/wivoce-laravel-echo-client
 
 environment:
